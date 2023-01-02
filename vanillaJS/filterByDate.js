@@ -43,6 +43,7 @@ function createRandomObject() {
 
 // NOTE: need to work with secs to not exceed int range when generating rand value
 var dateCreationMaxValSecs = Date.now() / 1000;
+var compareDate  = new Date('2022-02-28 15:03:59');
 var dateCreationMinValSecs = dateCreationMaxValSecs - 365 * 24 * 60 * 60;
 
 function createRandomDateWithinLastYear() {
@@ -65,13 +66,10 @@ function filterDate(db) {
     throw "Filter parameter needs to be an array!";
   }
   const res = [];
-  const compareVal = new Date();
-  compareVal.setDate(compareVal.getDate() - 30);
-  const filterTime = compareVal.getTime();
+  const filterTime = compareDate.getTime();
   for (let i = 0; i < db.length; i++) {
     const o = db[i];
 
-    // check whether within last 30 days
     if (o.customDate.getTime() > filterTime) {
       res.push(o);
     }

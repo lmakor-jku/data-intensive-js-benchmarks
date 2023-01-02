@@ -48,6 +48,7 @@ function createRandomObject() {
 // NOTE: need to work with secs to not exceed int range when generating rand value
 // NOTE: we shouldn't use now here as the scripts themselves should be stateless
 var dateCreationMaxValSecs  = new Date('2022-07-27 03:54:13') / 1000;
+var compareDate  = new Date('2022-02-28 15:03:59');
 var dateCreationMinValSecs = dateCreationMaxValSecs - 365 * 24 * 60 * 60;
 
 function createRandomDateWithinLastYear(){
@@ -70,13 +71,10 @@ function aggregateDate(arr) {
     throw "Aggregated construct needs to be an array!"
   }
   let sum = 0;
-  const compareVal = new Date();
-  compareVal.setDate(compareVal.getDate() - 30);
-  const filterTime = compareVal.getTime();
+  const filterTime = compareDate.getTime();
   for(let i = 0; i < arr.length; i++) {
     const o = arr[i];
 
-    // check whether within last 30 days
     if (o.customDate.getTime() > filterTime) {
       sum += o.e;
     }
